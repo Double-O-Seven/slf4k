@@ -15,6 +15,7 @@
  *
  */
 
+import groovy.lang.Closure
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -23,6 +24,7 @@ plugins {
     `maven-publish`
     signing
     id("org.jetbrains.dokka") version "1.4.30"
+    id("com.palantir.git-version") version "0.12.3"
 }
 
 repositories {
@@ -45,7 +47,11 @@ dependencies {
     testRuntimeOnly(group = "org.slf4j", name = "slf4j-simple", version = slf4jVersion)
 }
 
+val gitVersion: Closure<String> by extra
+
 group = "ch.leadrian.slf4k"
+
+version = gitVersion()
 
 java {
     toolchain {
