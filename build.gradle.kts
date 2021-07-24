@@ -25,6 +25,7 @@ dependencies {
     testImplementation(group = "org.junit.jupiter", name = "junit-jupiter-api", version = junitVersion)
 
     testRuntimeOnly(group = "org.junit.jupiter", name = "junit-jupiter-engine", version = junitVersion)
+    testRuntimeOnly(group = "org.slf4j", name = "slf4j-simple", version = slf4jVersion)
 }
 
 group = "ch.leadrian.slf4k"
