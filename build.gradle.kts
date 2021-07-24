@@ -1,8 +1,11 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     `java-library`
     kotlin("jvm") version "1.4.31"
     `maven-publish`
     signing
+    id("org.jetbrains.dokka") version "1.4.30"
 }
 
 repositories {
@@ -11,18 +14,47 @@ repositories {
 
 val slf4jVersion = "1.7.32"
 val junitVersion = "5.7.0"
+val mockkVersion = "1.11.0"
 
 dependencies {
     api(kotlin("reflect"))
     api(kotlin("stdlib-jdk8"))
     api(group = "org.slf4j", name = "slf4j-api", version = slf4jVersion)
 
+    testImplementation(group = "io.mockk", name = "mockk", version = mockkVersion)
     testImplementation(group = "org.junit.jupiter", name = "junit-jupiter-api", version = junitVersion)
 
     testRuntimeOnly(group = "org.junit.jupiter", name = "junit-jupiter-engine", version = junitVersion)
 }
 
 group = "ch.leadrian.slf4k"
+
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(8))
+        vendor.set(JvmVendorSpec.ADOPTOPENJDK)
+    }
+
+    withSourcesJar()
+    withJavadocJar()
+}
+
+tasks {
+    withType<KotlinCompile> {
+        kotlinOptions {
+            sourceCompatibility = "${JavaVersion.VERSION_1_8}"
+            jvmTarget = "${JavaVersion.VERSION_1_8}"
+        }
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+    named<Jar>("javadocJar") {
+        from(dokkaHtml)
+    }
+}
 
 val mavenJava by publishing.publications.creating(MavenPublication::class) {
     components.findByName("java")?.let { from(it) }
