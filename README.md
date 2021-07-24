@@ -1,4 +1,3 @@
-[![Actions Status](https://github.com/Double-O-Seven/slf4k/workflows/Java%20CI/badge.svg)](https://github.com/Double-O-Seven/slf4k/actions)
 [![Release Version](https://img.shields.io/maven-central/v/ch.leadrian.slf4k/slf4k-core.svg?label=release)](https://search.maven.org/search?q=g:ch.leadrian.slf4k)
 
 # slf4k
