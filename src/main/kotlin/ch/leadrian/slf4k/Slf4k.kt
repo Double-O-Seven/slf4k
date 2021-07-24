@@ -20,6 +20,7 @@ package ch.leadrian.slf4k
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.slf4j.Marker
+import kotlin.reflect.KClass
 
 /**
  * @return a logger for the given parameterized type [T]
@@ -30,12 +31,14 @@ inline fun <reified T : Any> loggerFor(): Logger = LoggerFactory.getLogger(T::cl
  * @return a logger for the given receiver type [T] or it's declaring class in case of a companion class
  */
 @Suppress("unused")
-inline fun <reified T : Any> T.logger(): Logger {
-    val classToLog = when {
-        T::class.isCompanion -> T::class.java.declaringClass ?: T::class.java
-        else -> T::class.java
+inline fun <reified T : Any> T.logger(): Logger = LoggerFactory.getLogger(resolveClassToLog(T::class))
+
+@PublishedApi
+internal fun resolveClassToLog(inputClass: KClass<*>): Class<out Any> {
+    return when {
+        inputClass.isCompanion -> inputClass.java.declaringClass ?: inputClass.java
+        else -> inputClass.java
     }
-    return LoggerFactory.getLogger(classToLog)
 }
 
 /**
