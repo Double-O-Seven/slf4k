@@ -1,3 +1,4 @@
+[![Java CI with Gradle](https://github.com/Double-O-Seven/slf4k/actions/workflows/gradle.yml/badge.svg)](https://github.com/Double-O-Seven/slf4k/actions/workflows/gradle.yml)
 [![Release Version](https://img.shields.io/maven-central/v/ch.leadrian.slf4k/slf4k-core.svg?label=release)](https://search.maven.org/search?q=g:ch.leadrian.slf4k)
 
 # slf4k
