@@ -29,6 +29,7 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven { setUrl("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven") }
 }
 
 val slf4jVersion = "1.7.32"
