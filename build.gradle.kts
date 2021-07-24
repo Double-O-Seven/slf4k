@@ -1,7 +1,6 @@
-
 plugins {
     `java-library`
-    kotlin("jvm")
+    kotlin("jvm") version "1.4.31"
     `maven-publish`
     signing
 }
@@ -10,10 +9,20 @@ repositories {
     mavenCentral()
 }
 
+val slf4jVersion = "1.7.32"
+val junitVersion = "5.7.0"
+
 dependencies {
+    api(kotlin("reflect"))
     api(kotlin("stdlib-jdk8"))
-	api(group = "org.slf4j", name = "slf4j-api", version = "1.7.32")
+    api(group = "org.slf4j", name = "slf4j-api", version = slf4jVersion)
+
+    testImplementation(group = "org.junit.jupiter", name = "junit-jupiter-api", version = junitVersion)
+
+    testRuntimeOnly(group = "org.junit.jupiter", name = "junit-jupiter-engine", version = junitVersion)
 }
+
+group = "ch.leadrian.slf4k"
 
 val mavenJava by publishing.publications.creating(MavenPublication::class) {
     components.findByName("java")?.let { from(it) }
@@ -49,7 +58,7 @@ publishing {
             val releasesRepoUrl = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
             url = when {
                 version.toString().endsWith("SNAPSHOT") -> snapshotsRepoUrl
-                else                                    -> releasesRepoUrl
+                else -> releasesRepoUrl
             }
             credentials {
                 val ossrhUsername: String? by extra
