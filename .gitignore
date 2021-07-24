@@ -11,17 +11,7 @@ local.properties
 
 # IntelliJ IDEA
 **/out
-**/.idea/caches
-**/.idea/dbnavigator.xml
-**/.idea/gradle.xml
-**/.idea/libraries
-**/.idea/modules.xml
-**/.idea/saveactions_settings.xml
-**/.idea/shelf
-**/.idea/tasks.xml
-**/.idea/usage.statistics.xml
-**/.idea/workspace.xml
-**/.idea/uiDesigner.xml
+**/.idea/
 *.iml
 
 # macOS
