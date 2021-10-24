@@ -58,7 +58,7 @@ inline fun Logger.trace(marker: Marker, message: () -> String) {
 /**
  * Log an exception and a lazily computed message at TRACE level.
  */
-inline fun Logger.trace(throwable: Throwable, message: () -> String) {
+inline fun Logger.trace(throwable: Throwable?, message: () -> String) {
     if (isTraceEnabled) {
         trace(message(), throwable)
     }
@@ -67,7 +67,7 @@ inline fun Logger.trace(throwable: Throwable, message: () -> String) {
 /**
  * Log an exception and a lazily computed message with the specified marker at TRACE level.
  */
-inline fun Logger.trace(marker: Marker, throwable: Throwable, message: () -> String) {
+inline fun Logger.trace(marker: Marker, throwable: Throwable?, message: () -> String) {
     if (isTraceEnabled) {
         trace(marker, message(), throwable)
     }
@@ -94,7 +94,7 @@ inline fun Logger.debug(marker: Marker, message: () -> String) {
 /**
  * Log an exception and a lazily computed message at DEBUG level.
  */
-inline fun Logger.debug(throwable: Throwable, message: () -> String) {
+inline fun Logger.debug(throwable: Throwable?, message: () -> String) {
     if (isDebugEnabled) {
         debug(message(), throwable)
     }
@@ -103,7 +103,7 @@ inline fun Logger.debug(throwable: Throwable, message: () -> String) {
 /**
  * Log an exception and a lazily computed message with the specified marker at DEBUG level.
  */
-inline fun Logger.debug(marker: Marker, throwable: Throwable, message: () -> String) {
+inline fun Logger.debug(marker: Marker, throwable: Throwable?, message: () -> String) {
     if (isDebugEnabled) {
         debug(marker, message(), throwable)
     }
@@ -130,7 +130,7 @@ inline fun Logger.info(marker: Marker, message: () -> String) {
 /**
  * Log an exception and a lazily computed message at INFO level.
  */
-inline fun Logger.info(throwable: Throwable, message: () -> String) {
+inline fun Logger.info(throwable: Throwable?, message: () -> String) {
     if (isInfoEnabled) {
         info(message(), throwable)
     }
@@ -139,7 +139,7 @@ inline fun Logger.info(throwable: Throwable, message: () -> String) {
 /**
  * Log an exception and a lazily computed message with the specified marker at INFO level.
  */
-inline fun Logger.info(marker: Marker, throwable: Throwable, message: () -> String) {
+inline fun Logger.info(marker: Marker, throwable: Throwable?, message: () -> String) {
     if (isInfoEnabled) {
         info(marker, message(), throwable)
     }
@@ -166,7 +166,7 @@ inline fun Logger.warn(marker: Marker, message: () -> String) {
 /**
  * Log an exception and a lazily computed message at WARN level.
  */
-inline fun Logger.warn(throwable: Throwable, message: () -> String) {
+inline fun Logger.warn(throwable: Throwable?, message: () -> String) {
     if (isWarnEnabled) {
         warn(message(), throwable)
     }
@@ -175,7 +175,7 @@ inline fun Logger.warn(throwable: Throwable, message: () -> String) {
 /**
  * Log an exception and a lazily computed message with the specified marker at WARN level.
  */
-inline fun Logger.warn(marker: Marker, throwable: Throwable, message: () -> String) {
+inline fun Logger.warn(marker: Marker, throwable: Throwable?, message: () -> String) {
     if (isWarnEnabled) {
         warn(marker, message(), throwable)
     }
@@ -202,7 +202,7 @@ inline fun Logger.error(marker: Marker, message: () -> String) {
 /**
  * Log an exception and a lazily computed message at ERROR level.
  */
-inline fun Logger.error(throwable: Throwable, message: () -> String) {
+inline fun Logger.error(throwable: Throwable?, message: () -> String) {
     if (isErrorEnabled) {
         error(message(), throwable)
     }
@@ -211,7 +211,7 @@ inline fun Logger.error(throwable: Throwable, message: () -> String) {
 /**
  * Log an exception and a lazily computed message with the specified marker at ERROR level.
  */
-inline fun Logger.error(marker: Marker, throwable: Throwable, message: () -> String) {
+inline fun Logger.error(marker: Marker, throwable: Throwable?, message: () -> String) {
     if (isErrorEnabled) {
         error(marker, message(), throwable)
     }
