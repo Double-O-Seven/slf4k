@@ -32,10 +32,15 @@ inline fun <reified T : Any> loggerFor(): Logger = LoggerFactory.getLogger(T::cl
 fun Any.logger(): Logger {
     val classToLog = when {
         this::class.isCompanion -> javaClass.declaringClass ?: javaClass
-        else -> javaClass
+        else                    -> javaClass
     }
     return LoggerFactory.getLogger(classToLog)
 }
+
+/**
+ * @return a logger with the given name
+ */
+fun logger(name: String): Logger = LoggerFactory.getLogger(name)
 
 /**
  * Log a lazily computed message at TRACE level.

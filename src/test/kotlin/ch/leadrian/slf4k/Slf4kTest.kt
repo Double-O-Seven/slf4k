@@ -17,7 +17,11 @@
 
 package ch.leadrian.slf4k
 
-import io.mockk.*
+import io.mockk.Runs
+import io.mockk.every
+import io.mockk.just
+import io.mockk.mockk
+import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.slf4j.Logger
@@ -526,6 +530,13 @@ internal class Slf4kTest {
         val logger = loggerFor<TestLoggers>()
 
         assertEquals("ch.leadrian.slf4k.TestLoggers", logger.name)
+    }
+
+    @Test
+    fun `should create logger with given name`() {
+        val logger = logger("TestLogger")
+
+        assertEquals("TestLogger", logger.name)
     }
 }
 

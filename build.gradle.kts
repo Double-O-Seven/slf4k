@@ -23,7 +23,7 @@ plugins {
     `maven-publish`
     signing
     alias(libs.plugins.dokka)
-    alias(libs.plugins.git.versions)
+    alias(libs.plugins.git.version)
 }
 
 repositories {
@@ -52,7 +52,6 @@ version = gitVersion()
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(8))
-        vendor.set(JvmVendorSpec.ADOPTOPENJDK)
     }
 
     withSourcesJar()

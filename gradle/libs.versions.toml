@@ -1,6 +1,6 @@
 [versions]
 dokka = "1.8.20"
-git-versions = "0.47.0"
+git-version = "3.0.0"
 junit = "5.10.0"
 mockk = "1.13.5"
 slf4j = "2.0.7"
@@ -14,4 +14,4 @@ slf4j-simple = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4
 
 [plugins]
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-git-versions = { id = "com.github.ben-manes.versions", version.ref = "git-versions" }
+git-version = { id = "com.palantir.git-version", version = "3.0.0" }
