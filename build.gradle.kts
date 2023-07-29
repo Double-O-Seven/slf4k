@@ -16,15 +16,14 @@
  */
 
 import groovy.lang.Closure
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-library`
-    kotlin("jvm") version "1.4.31"
+    kotlin("jvm") version "1.8.21"
     `maven-publish`
     signing
-    id("org.jetbrains.dokka") version "1.4.30"
-    id("com.palantir.git-version") version "0.12.3"
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.git.versions)
 }
 
 repositories {
@@ -32,20 +31,16 @@ repositories {
     maven { setUrl("https://maven.pkg.jetbrains.space/public/p/kotlinx-html/maven") }
 }
 
-val slf4jVersion = "1.7.32"
-val junitVersion = "5.7.0"
-val mockkVersion = "1.11.0"
-
 dependencies {
     api(kotlin("reflect"))
     api(kotlin("stdlib-jdk8"))
-    api(group = "org.slf4j", name = "slf4j-api", version = slf4jVersion)
+    api(libs.slf4j.api)
 
-    testImplementation(group = "io.mockk", name = "mockk", version = mockkVersion)
-    testImplementation(group = "org.junit.jupiter", name = "junit-jupiter-api", version = junitVersion)
+    testImplementation(libs.junit.jupiter.api)
+    testImplementation(libs.mockk)
 
-    testRuntimeOnly(group = "org.junit.jupiter", name = "junit-jupiter-engine", version = junitVersion)
-    testRuntimeOnly(group = "org.slf4j", name = "slf4j-simple", version = slf4jVersion)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testRuntimeOnly(libs.slf4j.simple)
 }
 
 val gitVersion: Closure<String> by extra
@@ -65,13 +60,6 @@ java {
 }
 
 tasks {
-    withType<KotlinCompile> {
-        kotlinOptions {
-            sourceCompatibility = "${JavaVersion.VERSION_1_8}"
-            jvmTarget = "${JavaVersion.VERSION_1_8}"
-        }
-    }
-
     test {
         useJUnitPlatform()
     }
@@ -115,7 +103,7 @@ publishing {
             val releasesRepoUrl = uri("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
             url = when {
                 version.toString().endsWith("SNAPSHOT") -> snapshotsRepoUrl
-                else -> releasesRepoUrl
+                else                                    -> releasesRepoUrl
             }
             credentials {
                 val ossrhUsername: String? by extra
