@@ -40,7 +40,7 @@ dependencies {
     testImplementation(libs.mockk)
 
     testRuntimeOnly(libs.junit.jupiter.engine)
-    testRuntimeOnly(libs.slf4j.simple)
+    testRuntimeOnly(libs.logback)
 }
 
 val gitVersion: Closure<String> by extra
@@ -51,7 +51,7 @@ version = gitVersion()
 
 java {
     toolchain {
-        languageVersion.set(JavaLanguageVersion.of(8))
+        languageVersion.set(JavaLanguageVersion.of(11))
     }
 
     withSourcesJar()

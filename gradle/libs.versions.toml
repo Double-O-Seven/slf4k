@@ -2,15 +2,16 @@
 dokka = "1.8.20"
 git-version = "3.0.0"
 junit = "5.10.0"
+logback = "1.4.8"
 mockk = "1.13.5"
 slf4j = "2.0.7"
 
 [libraries]
 junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junit" }
 junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junit" }
+logback = { group = "ch.qos.logback", name = "logback-classic", version.ref = "logback" }
 mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
 slf4j-api = { group = "org.slf4j", name = "slf4j-api", version.ref = "slf4j" }
-slf4j-simple = { group = "org.slf4j", name = "slf4j-simple", version.ref = "slf4j" }
 
 [plugins]
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }

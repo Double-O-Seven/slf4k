@@ -19,6 +19,7 @@ package ch.leadrian.slf4k
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import org.slf4j.MDC
 import org.slf4j.Marker
 
 /**
@@ -219,5 +220,35 @@ inline fun Logger.error(throwable: Throwable?, message: () -> String) {
 inline fun Logger.error(marker: Marker, throwable: Throwable?, message: () -> String) {
     if (isErrorEnabled) {
         error(marker, message(), throwable)
+    }
+}
+
+/**
+ * Execute the given [action] in an MDC context where the [key] is assigned [value].
+ *
+ * @return the result of [action], may be [Unit]
+ */
+inline fun <T> mdc(key: String, value: String?, action: () -> T): T {
+    putCloseable(key, value).use {
+        return action()
+    }
+}
+
+@PublishedApi
+internal fun putCloseable(key: String, value: String?): AutoCloseable {
+    val previousValue = MDC.get(key)
+    return if (previousValue != null) {
+        val closeable = RestoringMDCCloseable(key, previousValue)
+        MDC.put(key, value)
+        closeable
+    } else {
+        MDC.putCloseable(key, value)
+    }
+}
+
+private class RestoringMDCCloseable(private val key: String, private val previousValue: String) : AutoCloseable {
+
+    override fun close() {
+        MDC.put(key, previousValue)
     }
 }

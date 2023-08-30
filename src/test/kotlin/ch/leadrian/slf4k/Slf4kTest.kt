@@ -23,8 +23,11 @@ import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertAll
 import org.slf4j.Logger
+import org.slf4j.MDC
 import org.slf4j.Marker
 
 internal class Slf4kTest {
@@ -537,6 +540,21 @@ internal class Slf4kTest {
         val logger = logger("TestLogger")
 
         assertEquals("TestLogger", logger.name)
+    }
+
+    @Test
+    fun `should add MDC context`() {
+        val valueBefore = MDC.get("foo")
+        val valueDuring = mdc("foo", "bar") {
+            MDC.get("foo")
+        }
+        val valueAfter = MDC.get("foo")
+
+        assertAll(
+            { assertNull(valueBefore) },
+            { assertEquals("bar", valueDuring) },
+            { assertNull(valueAfter) },
+        )
     }
 }
 
