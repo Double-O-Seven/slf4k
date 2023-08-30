@@ -556,5 +556,21 @@ internal class Slf4kTest {
             { assertNull(valueAfter) },
         )
     }
+
+    @Test
+    fun `should replace MDC context`() {
+        MDC.put("foo", "bla")
+        val valueBefore = MDC.get("foo")
+        val valueDuring = mdc("foo", "bar") {
+            MDC.get("foo")
+        }
+        val valueAfter = MDC.get("foo")
+
+        assertAll(
+            { assertEquals("bla", valueBefore) },
+            { assertEquals("bar", valueDuring) },
+            { assertEquals("bla", valueAfter) },
+        )
+    }
 }
 
